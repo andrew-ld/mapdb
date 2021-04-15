@@ -518,12 +518,6 @@ public class IndexTreeLongLongMap(
 
     private val keySet: MutableLongSet =
             object : AbstractMutableLongCollection(), MutableLongSet {
-
-
-	      override fun cartesianProduct(p0: LongSet): AbstractLazyIterable<LongLongPair> {
-	      	throw NoSuchElementException()
-	      }
-
                 override fun contains(key: Long): Boolean {
                     return this@IndexTreeLongLongMap.containsKey(key)
                 }
@@ -785,28 +779,6 @@ public class IndexTreeLongLongMap(
     override fun values(): MutableLongCollection {
         return values;
     }
-
-    override fun flipUniqueValues(): MutableLongLongMap {
-
-        val result = LongLongMaps.mutable.empty()
-        forEachKeyValue { key, value ->
-            if (result.containsKey(value)) {
-                throw IllegalStateException("duplicate value")
-            } else {
-                result.put(value, key)
-            }
-        }
-        return result
-    }
-    /*
-    * This method was introduced in Eclipse Collections 10.0.0.M3
-    * Module would not compile without implementing this method
-    * pom.xml uses an open ended version, thats why Maven builds using latest version of Eclipse Collections.
-    * */
-    override fun updateValues(p0: LongLongToLongFunction?) {
-        throw UnsupportedOperationException("UpdateValues() hasn't been implemented yet");
-    }
-
 }
 
 
