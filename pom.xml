@@ -41,7 +41,7 @@
 
         <!--eclipse collections-->
         <ec.version>[7.0.0,)</ec.version>
-        <guava.version>[15.0,)</guava.version>
+        <guava.version>30.1.1-android</guava.version>
 
         <elsa.version>3.0.0-M5</elsa.version>
 
