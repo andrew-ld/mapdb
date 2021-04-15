@@ -153,29 +153,7 @@ public final class CleanerUtil {
                 throw new IllegalArgumentException(
                         "unmapping only works with direct buffers");
             }
-
-            try {
-                CLEANER.invokeExact(buffer);
-                /*
-                * Handling attachment of the ByteBuffer object
-                * Refer to https://github.com/jankotek/mapdb/issues/776 for details
-                * */
-                if (JAVA8_OR_LESS) {
-                    final MethodHandles.Lookup lookup = MethodHandles.lookup();
-                    final Class<?> directBufferClass =
-                            Class.forName("java.nio.DirectByteBuffer");
-                    Object bb = directBufferClass.cast(buffer);
-                    final Method m = directBufferClass.getMethod("attachment");
-                    m.setAccessible(true);
-                    final MethodHandle directBufferAttachmentMethod = lookup.unreflect(m);
-                    Object attachment = (Object) directBufferAttachmentMethod.invoke(bb);
-                    if(attachment != null)
-                        return freeBuffer((MappedByteBuffer) attachment);
-                }
-                return true;
-            } catch (Throwable e) {
-                throw new IOException(e);
-            }
-
+            
+            return false;
+        }
     }
-}

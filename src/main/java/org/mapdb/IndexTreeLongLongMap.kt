@@ -520,6 +520,10 @@ public class IndexTreeLongLongMap(
             object : AbstractMutableLongCollection(), MutableLongSet {
 
 
+	      override fun cartesianProduct(p0: LongSet): AbstractLazyIterable<LongLongPair> {
+	      	throw NoSuchElementException()
+	      }
+
                 override fun contains(key: Long): Boolean {
                     return this@IndexTreeLongLongMap.containsKey(key)
                 }
